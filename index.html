@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Copy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+            color: #ffffff;
+        }
+        .chat-container {
+            width: 80%;
+            max-width: 800px;
+            height: 80%;
+            background: #2f3136;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .chat-header {
+            background: #202225;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            border-bottom: 1px solid #292b2f;
+        }
+        .chat-window {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .message.user .content {
+            background-color: #7289da;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            color: #fff;
+            order: 2;
+        }
+        .message.bot .content {
+            background-color: #4f545c;
+            padding: 10px;
+            border-radius: 10px;
+            display: inline-block;
+            color: #fff;
+        }
+        .message img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 0 10px;
+        }
+        .input-container {
+            display: flex;
+            border-top: 1px solid #292b2f;
+            padding: 10px;
+            background: #202225;
+        }
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background: #40444b;
+            color: #fff;
+            margin-right: 10px;
+        }
+        .input-container button {
+            padding: 10px;
+            border: none;
+            background-color: #7289da;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .loading-bar {
+            height: 4px;
+            background-color: #7289da;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">Discord Copy</div>
+        <div class="chat-window" id="chat-window">
+        </div>
+        <div class="loading-bar" id="loading-bar"></div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type a message">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const chatWindow = document.getElementById('chat-window');
+            const loadingBar = document.getElementById('loading-bar');
+
+            if (userInput.value.trim() === '') return;
+
+            loadingBar.style.width = '100%';
+            setTimeout(() => {
+                loadingBar.style.width = '0';
+                const botMessage = document.createElement('div');
+                botMessage.className = 'message bot';
+                for (let i = 0; i < 999; i++) {
+                  botMessage.innerHTML = `<img src="https://dates4u.github.io/GPT-chat-AI/bot-icon.svg" alt="Bot"><div class="content">How can I assist you today?</div>`;
+                }
+                chatWindow.appendChild(botMessage);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            }, 1000);
+
+            userInput.value = '';
+        }
+    </script>
+</body>
+</html>
